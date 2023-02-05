@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">To-do-compose</string>
     <string name="add_icon">Add Icon</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="filter_list">Filter List Icon</string>
+    <string name="delete_all_action">Delete All</string>
 </resources>
