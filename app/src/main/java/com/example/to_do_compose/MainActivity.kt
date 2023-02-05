@@ -21,14 +21,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TodocomposeTheme {
-           navController = rememberNavController()
+                navController = rememberNavController()
                 SetupNavigation(navController = navController)
             }
         }
     }
-}
-@Preview(showBackground = true)
-@Composable
-fun MyApp() {
-    Text(text = "Catalina")
 }

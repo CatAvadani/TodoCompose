@@ -9,7 +9,7 @@ import com.example.to_do_compose.util.Constants
 import com.example.to_do_compose.util.Constants.TASK_SCREEN
 
 fun NavGraphBuilder.taskComposable(
-    navigateToListScreens: (Action) -> Unit
+    navigateToListScreen: (Action) -> Unit
 ) {
     composable(
         route = TASK_SCREEN,
