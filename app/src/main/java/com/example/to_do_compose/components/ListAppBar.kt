@@ -18,12 +18,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.to_do_compose.R
 import com.example.to_do_compose.models.Priority
 import com.example.to_do_compose.ui.theme.LARGE_PADDING
 import com.example.to_do_compose.ui.theme.TOP_APP_BAR_HEIGHT
 import com.example.to_do_compose.ui.theme.topAppBarBackgroundColor
 import com.example.to_do_compose.ui.theme.topAppBarContentColor
+import com.example.to_docompose.R
 
 @Composable
 fun ListAppBar() {
@@ -36,7 +36,7 @@ fun ListAppBar() {
     SearchAppBar(
         text = "",
         onTextChange = {},
-        onCloseClicked = { },
+        onCloseClicked = {},
         onSearchClicked = {}
     )
 
@@ -91,7 +91,7 @@ fun SearchAction(
     IconButton(onClick = { onSearchClicked() }) {
         Icon(
             imageVector = Icons.Filled.Search,
-            contentDescription = stringResource(R.string.search_icon),
+            contentDescription = "",
             tint = MaterialTheme.colors.topAppBarContentColor
         )
     }
