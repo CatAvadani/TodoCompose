@@ -19,13 +19,23 @@ val MediumGray = Color(0xFF9C9C9C)
 val DarkGray = Color(0xFF141414)
 
 // designing the theme to adapt to the dark or the light mode of the screen
+
+val Colors.taskItemTextColor: Color
+    @Composable
+    get() = if (isLight) DarkGray else LightGray
+
+val Colors.taskItemBackgroundColor: Color
+    @Composable
+    get() = if (isLight) Color.White else DarkGray
+
+
 val Colors.topAppBarContentColor: Color
     @Composable
     get() = if (isLight) Color.White else LightGray
 
 val Colors.topAppBarBackgroundColor: Color
-     @Composable
-     get() = if (isLight) Purple500 else Color.Black
+    @Composable
+    get() = if (isLight) Purple500 else Color.Black
 
 val Colors.fabBackgroundColor: Color
     @Composable

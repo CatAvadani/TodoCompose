@@ -4,4 +4,7 @@
     <string name="search_icon">Search Icon</string>
     <string name="filter_list">Filter List Icon</string>
     <string name="delete_all_action">Delete All</string>
+    <string name="text_search">Search</string>
+    <string name="icon_close">Close Icon</string>
+    <string name="text_tasks">Tasks</string>
 </resources>
