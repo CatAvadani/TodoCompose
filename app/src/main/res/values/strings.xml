@@ -7,4 +7,6 @@
     <string name="text_search">Search</string>
     <string name="icon_close">Close Icon</string>
     <string name="text_tasks">Tasks</string>
+    <string name="sad_icon">Sad Icon</string>
+    <string name="empty_content">No Tasks Found</string>
 </resources>
