@@ -18,17 +18,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.to_do_compose.models.Priority
 import com.example.to_do_compose.models.ToDoTask
 import com.example.to_do_compose.ui.theme.*
+import com.example.to_do_compose.util.RequestState
 
 @Composable
 fun ListContent(
-    tasks: List<ToDoTask>,
+    tasks: RequestState<List<ToDoTask>>,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-    if(tasks.isEmpty()) {
-        EmptyContent()
-    } else {
-        DisplayTasks(tasks = tasks, navigateToTaskScreen = navigateToTaskScreen)
-    }
+   if (tasks is RequestState.Success) {
+       if(tasks.data.isEmpty()) {
+           EmptyContent()
+       } else {
+           DisplayTasks(tasks = tasks.data, navigateToTaskScreen = navigateToTaskScreen)
+   }
 
 }
 @Composable
