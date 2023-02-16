@@ -30,6 +30,7 @@ fun ListContent(
            EmptyContent()
        } else {
            DisplayTasks(tasks = tasks.data, navigateToTaskScreen = navigateToTaskScreen)
+       }
    }
 
 }
