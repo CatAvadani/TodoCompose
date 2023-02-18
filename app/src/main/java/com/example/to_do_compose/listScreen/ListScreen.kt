@@ -3,6 +3,7 @@ package com.example.to_do_compose.listScreen
 import android.annotation.SuppressLint
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
+import androidx.compose.material.SnackbarResult
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import com.example.to_do_compose.components.ListAppBar
@@ -35,7 +36,10 @@ fun ListScreen(
           sharedViewModel.handleDatabaseAction(action = action)
         },
         taskTitle = sharedViewModel.title.value,
-        action = action
+        action = action,
+        onUndoClicked = {
+            sharedViewModel.action.value = it
+        }
     )
     Scaffold(
         scaffoldState = scaffoldState,
@@ -59,6 +63,7 @@ fun ListScreen(
 fun DisplaySnackBar(
     scaffoldState: ScaffoldState,
     handleDatabaseAction: () -> Unit,
+    onUndoClicked: (Action) -> Unit,
     taskTitle: String,
     action: Action
 ) {
@@ -70,12 +75,38 @@ fun DisplaySnackBar(
             scope.launch {
                val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
                    message = "${action.name}: $taskTitle",
-                   actionLabel = "Ok",
+                   actionLabel = setActionLabel(action),
                    )
+                undoDeletedTask(
+                    action = action,
+                    snackBarResult = snackBarResult,
+                    onUndoClicked = onUndoClicked
+                 )
             }
         }
     }
+}
 
+private fun setActionLabel(action: Action): String{
+    return if (action.name == "DELETE") {
+        "UNDO"
+    } else {
+        "OK"
+    }
+
+}
+
+private fun undoDeletedTask(
+    action: Action,
+    snackBarResult: SnackbarResult,
+    onUndoClicked: (Action) -> Unit,
+) {
+   if (
+     snackBarResult == SnackbarResult.ActionPerformed &&
+     action == Action.DELETE
+   ) {
+    onUndoClicked(Action.UNDO)
+   }
 }
 
 
