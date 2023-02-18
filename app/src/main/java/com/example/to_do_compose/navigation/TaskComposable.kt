@@ -9,7 +9,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.to_do_compose.taskScreen.TaskScreen
 import com.example.to_do_compose.util.Action
-import com.example.to_do_compose.util.Constants
 import com.example.to_do_compose.util.Constants.TASK_ARGUMENT_KEY
 import com.example.to_do_compose.util.Constants.TASK_SCREEN
 import com.example.to_do_compose.viewmodels.SharedViewModel
@@ -20,7 +19,7 @@ fun NavGraphBuilder.taskComposable(
 ) {
     composable(
         route = TASK_SCREEN,
-        arguments = listOf(navArgument(Constants.TASK_ARGUMENT_KEY) {
+        arguments = listOf(navArgument(TASK_ARGUMENT_KEY) {
             type = NavType.IntType
         })
     ) { navBackStackEntry ->
@@ -28,7 +27,8 @@ fun NavGraphBuilder.taskComposable(
         sharedViewModel.getSelectedTask(taskId = taskId)
 
         val selectedTask by sharedViewModel.selectedTask.collectAsState()
-        LaunchedEffect(key1 = taskId) {
+
+        LaunchedEffect(key1 = selectedTask) {
             sharedViewModel.updateTaskFields(selectedTask)
         }
 
