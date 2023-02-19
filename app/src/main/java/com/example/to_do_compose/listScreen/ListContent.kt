@@ -19,21 +19,46 @@ import com.example.to_do_compose.models.Priority
 import com.example.to_do_compose.models.ToDoTask
 import com.example.to_do_compose.ui.theme.*
 import com.example.to_do_compose.util.RequestState
+import com.example.to_do_compose.util.SearchAppBarState
 
 @Composable
 fun ListContent(
-    tasks: RequestState<List<ToDoTask>>,
+    allTasks: RequestState<List<ToDoTask>>,
+    searchedTasks: RequestState<List<ToDoTask>>,
+    searchAppBarState: SearchAppBarState,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-   if (tasks is RequestState.Success) {
-       if(tasks.data.isEmpty()) {
-           EmptyContent()
-       } else {
-           DisplayTasks(tasks = tasks.data, navigateToTaskScreen = navigateToTaskScreen)
-       }
-   }
+  if (searchAppBarState == SearchAppBarState.TRIGGERED) {
+     if (searchedTasks is RequestState.Success) {
+         HandleListContent(
+             tasks = searchedTasks.data ,
+             navigateToTaskScreen = navigateToTaskScreen
+         )
+     }
+  } else {
+      if (allTasks is RequestState.Success) {
+          HandleListContent(
+              tasks = allTasks.data,
+              navigateToTaskScreen = navigateToTaskScreen
+          )
+      }
+  }
 
 }
+@Composable
+fun HandleListContent(
+    tasks: List<ToDoTask>,
+    navigateToTaskScreen: (taskId: Int) -> Unit
+) {
+    if(tasks.isEmpty()) {
+        EmptyContent()
+    } else {
+        DisplayTasks(tasks = tasks, navigateToTaskScreen = navigateToTaskScreen)
+    }
+
+}
+
+
 @Composable
 fun DisplayTasks(
     tasks: List<ToDoTask>,
