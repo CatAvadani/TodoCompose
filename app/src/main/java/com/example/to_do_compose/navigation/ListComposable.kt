@@ -1,6 +1,5 @@
 package com.example.to_do_compose.navigation
 
-import android.util.Log
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
