@@ -121,7 +121,7 @@ fun ExistingAppBarActions(
     var openDialog by remember { mutableStateOf(false) }
 
     DisplayAlertDialog(
-        title = stringResource(id = R.string.delete_task),
+        title = stringResource(id = R.string.delete_task, selectedTask.title),
         message = stringResource(
             id = R.string.delete_task_confirmation,
             selectedTask.title),
