@@ -25,32 +25,53 @@ import com.example.to_do_compose.util.SearchAppBarState
 fun ListContent(
     allTasks: RequestState<List<ToDoTask>>,
     searchedTasks: RequestState<List<ToDoTask>>,
+    lowPriorityTasks: List<ToDoTask>,
+    highPriorityTasks: List<ToDoTask>,
+    sortState: RequestState<Priority>,
     searchAppBarState: SearchAppBarState,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-  if (searchAppBarState == SearchAppBarState.TRIGGERED) {
-     if (searchedTasks is RequestState.Success) {
-         HandleListContent(
-             tasks = searchedTasks.data ,
-             navigateToTaskScreen = navigateToTaskScreen
-         )
-     }
-  } else {
-      if (allTasks is RequestState.Success) {
-          HandleListContent(
-              tasks = allTasks.data,
-              navigateToTaskScreen = navigateToTaskScreen
-          )
-      }
-  }
 
+    if (sortState is RequestState.Success) {
+        when {
+            searchAppBarState == SearchAppBarState.TRIGGERED -> {
+                if (searchedTasks is RequestState.Success) {
+                        HandleListContent(
+                            tasks = searchedTasks.data,
+                            navigateToTaskScreen = navigateToTaskScreen
+                        )
+                    }
+                }
+            sortState.data == Priority.NONE -> {
+                if (allTasks is RequestState.Success) {
+                    HandleListContent(
+                        tasks = allTasks.data,
+                        navigateToTaskScreen = navigateToTaskScreen
+                    )
+                }
+            }
+            sortState.data == Priority.LOW -> {
+                HandleListContent(
+                    tasks = lowPriorityTasks,
+                    navigateToTaskScreen = navigateToTaskScreen
+                )
+            }
+            sortState.data == Priority.HIGH -> {
+                HandleListContent(
+                    tasks = highPriorityTasks,
+                    navigateToTaskScreen = navigateToTaskScreen
+                )
+            }
+        }
+    }
 }
+
 @Composable
 fun HandleListContent(
     tasks: List<ToDoTask>,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-    if(tasks.isEmpty()) {
+    if (tasks.isEmpty()) {
         EmptyContent()
     } else {
         DisplayTasks(tasks = tasks, navigateToTaskScreen = navigateToTaskScreen)
