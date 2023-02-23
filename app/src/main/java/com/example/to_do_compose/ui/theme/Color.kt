@@ -21,6 +21,10 @@ val NonePriorityColor = MediumGray
 
 // designing the theme to adapt to the dark or the light mode of the screen
 
+val Colors.splashScreenBackground: Color
+    @Composable
+    get() = if (isLight) Purple700 else Color.Black
+
 val Colors.taskItemTextColor: Color
     @Composable
     get() = if (isLight) DarkGray else LightGray
